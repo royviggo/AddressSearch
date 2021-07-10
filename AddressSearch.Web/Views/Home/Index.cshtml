@@ -1,0 +1,68 @@
+﻿@model IndexViewModel
+@{
+  ViewData["Title"] = "Adressesøk i Norge";
+}
+
+<form>
+  <div class="row align-items-end">
+    <div class="col-5">
+      <label for="Search" class="col-form-label">Adresse</label>
+      <input id="Search" type="text" asp-for="Search" class="form-control" placeholder="">
+      <small id="SearchHelp" class="form-text text-muted">Søker i alle adressefelter, bruk * for å søke etter deler av ord</small>
+    </div>
+    <div class="col-2">
+      <label for="SearchMode" class="col-form-label">Søk etter</label>
+      <select asp-for="SearchMode" asp-items="Model.SearchModeList" class="form-control" id="SearchMode" required></select>
+      <small id="SearchModeHelp" class="form-text text-muted">&nbsp;</small>
+    </div>
+    <div class="col-2">
+      <input class="btn btn-primary" type="submit" value="  Søk  " />
+      <small id="submitHelp" class="form-text text-muted">&nbsp;</small>
+    </div>
+  </div>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+  <div class="alert-danger mt-4 p-3">@Model.ErrorMessage</div>
+}
+
+@if (Model.SearchResults != null)
+{
+  <div class="container pt-4">
+    <div class="row">
+      <p>Antall treff: @Model.SearchResults.TotalItems | Side @Model.SearchResults.PageIndex av @Model.SearchResults.TotalPages</p>
+    </div>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>Adresse</th>
+      <th>Postnr</th>
+      <th>Poststed</th>
+      <th>Kommunenr</th>
+      <th>Kommune</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var address in Model.SearchResults)
+    {
+      <tr>
+        <td>@address.AddressText</td>
+        <td>@address.PostCode</td>
+        <td>@address.City</td>
+        <td>@address.CountyNumber</td>
+        <td>@address.County</td>
+      </tr>
+    }
+    </tbody>
+  </table>
+  <paging page-no="@Model.SearchResults.PageIndex" 
+          page-size="@Model.SearchResults.PageSize"
+          total-records="@Model.SearchResults.TotalItems"
+          query-string-key-page-no="PageIndex"
+          query-string-key-page-size="PageSize"
+          show-total-pages="false"
+          show-total-records="false">
+  </paging>
+}
