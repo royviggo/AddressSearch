@@ -14,30 +14,19 @@ namespace AddressSearch.Web.Mappings
                 Sokemodus = (SearchMode?)int.Parse(model.SearchMode),
                 Side = model.PageIndex - 1,
                 TreffPerSide = model.PageSize,
-
-                //Adressenavn = null,
-                //Adressetekst = null,
-                //Nummer = null,
-                //Bokstav = null,
-                //Adressekode = null,
-                //AdresseTilleggsnavn = null,
-                //Postnummer = null,
-                //Poststed = null,
-                //Kommunenummer = null,
-                //Kommunenavn = null,
-                //ObjektType = null,
-                //Gardsnummer = null,
-                //Bruksnummer = null,
-                //Undernummer = null,
-                //Bruksenhetsnummer = null,
-                //Festenummer = null,
-                //UtKoordSys = null,
-                //Filtrer = null,
-                //AsciiKompatibel = null
             };
         }
 
-        public static AddressViewModel Map(OutputAdress address)
+        public static PaginatedList<AddressViewModel> Map(OutputAdressList addressList)
+        {
+            return new PaginatedList<AddressViewModel>(
+                addressList.Adresser.Select(Map),
+                addressList.Metadata.TotaltAntallTreff,
+                addressList.Metadata.Side + 1,
+                addressList.Metadata.TreffPerSide);
+        }
+
+        private static AddressViewModel Map(OutputAdress address)
         {
             return new()
             {
@@ -50,15 +39,6 @@ namespace AddressSearch.Web.Mappings
                 CountyNumber = address.Kommunenummer,
                 County = address.Kommunenavn,
             };
-        }
-
-        public static PaginatedList<AddressViewModel> Map(OutputAdressList addressList)
-        {
-            return new PaginatedList<AddressViewModel>(
-                addressList.Adresser.Select(Map),
-                addressList.Metadata.TotaltAntallTreff,
-                addressList.Metadata.Side + 1,
-                addressList.Metadata.TreffPerSide);
         }
     }
 }
