@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <OpenApiReference Include="openapi.json" CodeGenerator="NSwagCSharp" Namespace="AddressSearch.Infrastructure.Services" ClassName="GeonorgeAddressClient" />
+    <None Include="openapi.json" ClassName="GeonorgeAddressClient" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,11 +1,11 @@
-﻿using System;
-using AddressSearch.Web.Mappings;
+﻿using AddressSearch.Web.Mappings;
 using AddressSearch.Web.Models;
+using GeonorgeAddressSearch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using GeonorgeAddressSearch;
 
 namespace AddressSearch.Web.Controllers
 {
@@ -38,6 +38,12 @@ namespace AddressSearch.Web.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Details(DetailsViewModel model)
+        {
+            return PartialView(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

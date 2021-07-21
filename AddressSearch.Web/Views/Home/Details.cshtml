@@ -1,0 +1,57 @@
+﻿@using AddressSearch.Web.Extensions
+@model DetailsViewModel
+
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">  
+        <h4 class="modal-title">Adresse</h4>  
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>  
+      </div>  
+      <div class="modal-body row">
+        <div class="col-5">
+          <h5>Gateadresse</h5>
+          <p>
+            @Model.AddressText<br />
+            @if (!string.IsNullOrEmpty(Model.AddressExtraName))
+            {
+              @Model.AddressExtraName<br />
+            }
+            @Model.PostCode @Model.City
+          </p>
+
+          <h5>Kommune</h5>
+          <p>@Model.CountyNumber @Model.County</p>
+
+          <h5>Matrikkeladresse</h5>
+          <p>
+            Gårds- og bruksnummer: @Model.Gardsnummer/@Model.Bruksnummer
+
+            @if (Model.Undernummer is > 0)
+            {
+              <br /><span>Undernummer: @Model.Undernummer</span>
+            }
+            @if (Model.Festenummer is > 0)
+            {
+              <br/><span>Festenummer: @Model.Festenummer</span>
+            }
+          </p>
+
+          <h5>Koordinater</h5>
+          <p>
+            Nord: @Model.Lat.ToDecimalString()<br />
+            Øst: @Model.Lon.ToDecimalString()<br />
+            Koordinatsystem: <a href="https://epsg.io/25833" target="_blank">ETRS89, UTM-sone 33N</a>
+          </p>
+        </div>
+
+        <div class="col-7">
+          <iframe src="https://norgeskart.no/#!?project=seeiendom&layers=1002&zoom=16&lat=@(Model.Lat.ToDecimalString())&lon=@(Model.Lon.ToDecimalString())&p=searchOptionsPanel&markerLat=@(Model.Lat.ToDecimalString())&markerLon=@(Model.Lon.ToDecimalString())&sok=&showSelection=false&type=1" width="600" height="450"></iframe>
+        </div>
+      </div>
+      <div class="modal-footer">  
+        <button data-dismiss="modal" id="cancel" class="btn btn-default" type="button">Lukk</button>  
+      </div>  
+    </div>
+  </div>
+</div>

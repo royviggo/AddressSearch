@@ -1,4 +1,8 @@
-﻿@model IndexViewModel
+﻿@using AddressSearch.Web.Extensions
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Microsoft.VisualBasic.CompilerServices
+@using AddressSearch.Web.Controllers
+@model IndexViewModel
 @{
   ViewData["Title"] = "Adressesøk i Norge";
 }
@@ -36,28 +40,33 @@
   </div>
   <table class="table table-bordered">
     <thead>
-    <tr>
-      <th>Adresse</th>
-      <th>Postnr</th>
-      <th>Poststed</th>
-      <th>Kommunenr</th>
-      <th>Kommune</th>
-    </tr>
+      <tr>
+        <th>Adresse</th>
+        <th>Postnr</th>
+        <th>Poststed</th>
+        <th>Kommunenr</th>
+        <th>Kommune</th>
+        <th>Gårdsnr</th>
+        <th>Bruksnr</th>
+      </tr>
     </thead>
     <tbody>
-    @foreach (var address in Model.SearchResults)
-    {
+      @foreach (var address in Model.SearchResults)
+      {
       <tr>
-        <td>@address.AddressText</td>
+        @*<td>@Html.ActionLink(address.AddressText, "Details", "Home", address)</td>*@
+        <td><a href="#" class="showDetails" data-url="@Url.ActionLink("Details", "Home", address)">@address.AddressText</a></td>
         <td>@address.PostCode</td>
         <td>@address.City</td>
         <td>@address.CountyNumber</td>
         <td>@address.County</td>
+        <td>@address.Gardsnummer</td>
+        <td>@address.Bruksnummer</td>
       </tr>
-    }
+      }
     </tbody>
   </table>
-  <paging page-no="@Model.SearchResults.PageIndex" 
+  <paging page-no="@Model.SearchResults.PageIndex"
           page-size="@Model.SearchResults.PageSize"
           total-records="@Model.SearchResults.TotalItems"
           query-string-key-page-no="PageIndex"
@@ -65,4 +74,19 @@
           show-total-pages="false"
           show-total-records="false">
   </paging>
+}
+<div id="partialDetails">
+</div>
+
+@section Scripts{
+  <script language="javascript">
+    $(document).on("click", ".showDetails", function() {
+      $.ajax({
+        url: $(this).data("url")
+      }).done(function(content) {
+        $("#partialDetails").html(content);
+        $("#detailsModal").modal("show");
+      });
+    });
+  </script>
 }
