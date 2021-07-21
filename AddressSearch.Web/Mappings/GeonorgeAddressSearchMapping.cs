@@ -12,6 +12,7 @@ namespace AddressSearch.Web.Mappings
             {
                 Sok = model.Search,
                 Sokemodus = (SearchMode?)int.Parse(model.SearchMode),
+                UtKoordSys = 25833,
                 Side = model.PageIndex - 1,
                 TreffPerSide = model.PageSize,
             };
@@ -38,6 +39,14 @@ namespace AddressSearch.Web.Mappings
                 City = address.Poststed,
                 CountyNumber = address.Kommunenummer,
                 County = address.Kommunenavn,
+                AddressCode = address.Adressekode,
+                Gardsnummer = address.Gardsnummer,
+                Bruksnummer = address.Bruksnummer,
+                Undernummer = address.Undernummer,
+                Festenummer = address.Festenummer,
+                Lat = address.Representasjonspunkt.Lat,
+                Lon = address.Representasjonspunkt.Lon,
+                Epsg = address.Representasjonspunkt.Epsg,
             };
         }
     }
