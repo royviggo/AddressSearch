@@ -53,16 +53,15 @@
     <tbody>
       @foreach (var address in Model.SearchResults)
       {
-      <tr>
-        @*<td>@Html.ActionLink(address.AddressText, "Details", "Home", address)</td>*@
-        <td><a href="#" class="showDetails" data-url="@Url.ActionLink("Details", "Home", address)">@address.AddressText</a></td>
-        <td>@address.PostCode</td>
-        <td>@address.City</td>
-        <td>@address.CountyNumber</td>
-        <td>@address.County</td>
-        <td>@address.Gardsnummer</td>
-        <td>@address.Bruksnummer</td>
-      </tr>
+        <tr>
+          <td><a href="#" class="showDetails" data-url="@Url.ActionLink("Details", "Home", address)">@address.AddressText</a></td>
+          <td>@address.PostCode</td>
+          <td>@address.City</td>
+          <td>@address.CountyNumber</td>
+          <td>@address.County</td>
+          <td>@address.Gardsnummer</td>
+          <td>@address.Bruksnummer</td>
+        </tr>
       }
     </tbody>
   </table>
