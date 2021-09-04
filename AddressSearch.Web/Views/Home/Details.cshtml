@@ -4,10 +4,10 @@
 <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
-      <div class="modal-header">  
-        <h4 class="modal-title">Adresse</h4>  
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>  
-      </div>  
+      <div class="modal-header">
+        <h4 class="modal-title">Adresse</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
       <div class="modal-body row">
         <div class="col-5">
           <h5>Gateadresse</h5>
@@ -33,7 +33,7 @@
             }
             @if (Model.Festenummer is > 0)
             {
-              <br/><span>Festenummer: @Model.Festenummer</span>
+              <br /><span>Festenummer: @Model.Festenummer</span>
             }
           </p>
 
@@ -46,12 +46,12 @@
         </div>
 
         <div class="col-7">
-          <iframe src="https://norgeskart.no/#!?project=seeiendom&layers=1002&zoom=16&lat=@(Model.Lat.ToDecimalString())&lon=@(Model.Lon.ToDecimalString())&p=searchOptionsPanel&markerLat=@(Model.Lat.ToDecimalString())&markerLon=@(Model.Lon.ToDecimalString())&sok=&showSelection=false&type=1" width="600" height="450"></iframe>
+          <iframe src="https://norgeskart.no/#!?project=seeiendom&layers=1002&zoom=15&lat=@(Model.Lat.ToDecimalString())&lon=@(Model.Lon.ToDecimalString())&p=searchOptionsPanel&markerLat=@(Model.Lat.ToDecimalString())&markerLon=@(Model.Lon.ToDecimalString())&sok=&showSelection=false&type=1" width="600" height="450"></iframe>
         </div>
       </div>
-      <div class="modal-footer">  
-        <button data-dismiss="modal" id="cancel" class="btn btn-default" type="button">Lukk</button>  
-      </div>  
+      <div class="modal-footer">
+        <button data-dismiss="modal" id="cancel" class="btn btn-primary" type="button">Lukk</button>
+      </div>
     </div>
   </div>
 </div>
