@@ -50,6 +50,10 @@ namespace GeonorgeAddressSearch.Utils
                 var array = ((Array)value).OfType<object>();
                 return string.Join(",", array.Select(o => ConvertToString(o, cultureInfo)));
             }
+            else
+            {
+                // Empty
+            }
 
             return Convert.ToString(value, cultureInfo);
         }
