@@ -1,4 +1,5 @@
 ﻿using GeonorgeAddressSearch;
+using GeonorgeAddressSearch.Exceptions;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -27,7 +28,7 @@ try
         Console.WriteLine($"{address.Adressetekst}, {address.Postnummer} {address.Poststed}");
     }
 }
-catch (Exception ex)
+catch (Exception ex) when (ex is ApiException)
 {
     Console.WriteLine($"Error calling GeonorgeAddressSearchService: {ex}");
 }

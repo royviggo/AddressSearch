@@ -1,6 +1,7 @@
 ﻿using AddressSearch.Web.Mappings;
 using AddressSearch.Web.Models;
 using GeonorgeAddressSearch;
+using GeonorgeAddressSearch.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -30,7 +31,7 @@ namespace AddressSearch.Web.Controllers
                 {
                     model.SearchResults = GeonorgeAddressSearchMapping.Map(await _searchService.SearchAsync(searchRequest));
                 }
-                catch (Exception e)
+                catch (Exception e) when (e is ApiException)
                 {
                     _logger.LogError($"{e.Message} {e.StackTrace}");
                     model.ErrorMessage = e.Message;
