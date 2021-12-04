@@ -1,5 +1,4 @@
-﻿using GeonorgeAddressSearch.Exceptions;
-using GeonorgeAddressSearch.Extensions;
+﻿using GeonorgeAddressSearch.Extensions;
 using GeonorgeAddressSearch.Utils;
 using Microsoft.Extensions.Options;
 using System.Net.Http;
@@ -32,7 +31,9 @@ namespace GeonorgeAddressSearch
             init
             {
                 if (!string.IsNullOrEmpty(value.BaseUrl))
+                {
                     _geonorgeAddressSearchOptions.BaseUrl = value.BaseUrl;
+                }
             }
         }
 
@@ -46,12 +47,14 @@ namespace GeonorgeAddressSearch
                 }
             };
 
-        /// <summary>Standard søk.</summary>
-        /// <param name="addressSearch"></param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>OK</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async Task<OutputAdressList> SearchAsync(AddressSearchRequest addressSearch, CancellationToken cancellationToken = default)
+        public async Task<OutputAdressList> SearchAsync(AddressSearchRequest addressSearch)
+        {
+            var uri = AddressSearchUrlBuilder(GeonorgeAddressSearchOptions.BaseUrl, addressSearch);
+
+            return await _httpClient.GetFromJsonAsync<OutputAdressList>(uri, JsonSerializerOptions);
+        }
+
+        public async Task<OutputAdressList> SearchAsync(AddressSearchRequest addressSearch, CancellationToken cancellationToken)
         {
             var uri = AddressSearchUrlBuilder(GeonorgeAddressSearchOptions.BaseUrl, addressSearch);
 
@@ -92,6 +95,5 @@ namespace GeonorgeAddressSearch
             urlBuilder.Length--;
             return urlBuilder.ToString();
         }
-
     }
 }
