@@ -1,5 +1,6 @@
 # Address Search in Norway
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/acdae699573b4cbdace1c8fea2b3737c)](https://app.codacy.com/gh/royviggo/AddressSearch?utm_source=github.com&utm_medium=referral&utm_content=royviggo/AddressSearch&utm_campaign=Badge_Grade_Settings)
 [![.NET](https://github.com/royviggo/AddressSearch/actions/workflows/dotnet.yml/badge.svg)](https://github.com/royviggo/AddressSearch/actions/workflows/dotnet.yml)
 
 ![Address Search](doc/image/address_search.png)
