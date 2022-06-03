@@ -9,7 +9,7 @@ Example application in ASP.NET Core 5 that use a REST API from Kartverket (The N
 
 * API name: Åpent adresse-API fra Kartverket
 * Open API spesification: https://ws.geonorge.no/adresser/v1/
-* Information: https://kartkatalog.geonorge.no/metadata/adresse-rest-api/44eeffdc-6069-4000-a49b-2d6bfc59ac6
+* Information: https://kartkatalog.geonorge.no/metadata/adresse-rest-api/44eeffdc-6069-4000-a49b-2d6bfc59ac61
 
 This solution have 3 projects:
 
